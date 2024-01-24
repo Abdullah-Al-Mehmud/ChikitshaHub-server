@@ -17,16 +17,16 @@ router.get("/", async (req, res) => {
 });
 
 // get data by id
-router.get("/:id", async (req, res) => {
-  try {
-    const id = req.params.id;
-    const result = await Doctor.findById(id);
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to get single doctor data" });
-  }
-});
+// router.get("/:id", async (req, res) => {
+//   try {
+//     const id = req.params.id;
+//     const result = await Doctor.findById(id);
+//     res.send(result);
+//   } catch (error) {
+//     console.log(error);
+//     res.status(500).json({ msg: "unable to get single doctor data" });
+//   }
+// });
 
 // post your document
 router.post("/", async (req, res) => {
