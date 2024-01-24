@@ -28,6 +28,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// get data by category
+router.get("/1/:category", async (req, res) => {
+  try {
+    const category = req.params.category;
+    const result = await Doctor.find({category: category});
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
+  }
+});
+
 // post your document
 router.post("/", async (req, res) => {
   try {
