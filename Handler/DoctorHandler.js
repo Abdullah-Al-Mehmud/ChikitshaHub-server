@@ -28,6 +28,18 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+// get data by category
+router.get("/1/:category", async (req, res) => {
+  try {
+    const category = req.params.category;
+    const result = await Doctor.find({category: category});
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
+  }
+});
+
 // post your document
 router.post("/", async (req, res) => {
   try {
@@ -40,15 +52,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save doctor data" });
   }
 });
-// router.post("/", async (req, res) => {
-//   try {
-//     const newDoctor = new Doctor(req.body);
-//     await newDoctor.save();
-//     res.status(201).send({ message: "added successfully ", success: true });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ msg: "unable to save doctor data" });
-//   }
-// });
 
 module.exports = router;
