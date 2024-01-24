@@ -32,7 +32,6 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newDoctor = new Doctor(req.body);
-
     const result = await newDoctor.save();
     res.send(result);
   } catch (error) {
@@ -40,15 +39,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save doctor data" });
   }
 });
-// router.post("/", async (req, res) => {
-//   try {
-//     const newDoctor = new Doctor(req.body);
-//     await newDoctor.save();
-//     res.status(201).send({ message: "added successfully ", success: true });
-//   } catch (error) {
-//     console.log(error);
-//     res.status(500).json({ msg: "unable to save doctor data" });
-//   }
-// });
 
 module.exports = router;
