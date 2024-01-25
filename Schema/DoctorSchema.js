@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 // Define the award schema
-const awardSchema = new mongoose.Schema({
-  date: { type: Date, required: true },
-  name: { type: String, required: true },
-  description: { type: String, required: true },
-});
 
 // Define the education schema
 const educationSchema = new mongoose.Schema({
@@ -18,7 +13,7 @@ const educationSchema = new mongoose.Schema({
 const experienceSchema = new mongoose.Schema({
   hospitalName: { type: String, required: true },
   start: { type: Date, required: true },
-  end: { type: Date, default: null },
+  end: { type: String, required: true },
   year: { type: Number, required: true },
 });
 
@@ -89,7 +84,7 @@ const doctorSchema = mongoose.Schema({
     type: experienceSchema,
     required: true,
   },
-  awards: [awardSchema], // Array of awards
+
   services: [
     {
       type: String,

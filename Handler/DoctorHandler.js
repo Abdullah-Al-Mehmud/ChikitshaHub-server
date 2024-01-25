@@ -44,8 +44,8 @@ router.get("/1/:category", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newDoctor = new Doctor(req.body);
-    const result = await newDoctor.save();
-    res.send(result);
+    await newDoctor.save();
+    res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to save doctor data" });
