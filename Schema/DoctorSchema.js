@@ -33,11 +33,13 @@ const doctorSchema = mongoose.Schema({
       required: true,
     },
   ],
+  degrees: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   category: {
-    type: String,
-    required: true,
-  },
-  img: {
     type: String,
     required: true,
   },
@@ -51,7 +53,7 @@ const doctorSchema = mongoose.Schema({
   },
   joiningDate: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   location: {
     type: String,
