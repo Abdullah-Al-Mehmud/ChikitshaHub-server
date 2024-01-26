@@ -5,7 +5,8 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
 const doctorHandler = require("./Handler/DoctorHandler");
-const bmiHandler = require("./Handler/BMIHandler")
+const bmiHandler = require("./Handler/BMIHandler");
+const appoitmentHandler = require("./Handler/AppointmentHandler");
 
 // middleware
 app.use(cors());
@@ -18,8 +19,8 @@ mongoose
 
 // application routes
 app.use("/doctors", doctorHandler);
-
 app.use("/bmi", bmiHandler);
+app.use("/appoitment", appoitmentHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");

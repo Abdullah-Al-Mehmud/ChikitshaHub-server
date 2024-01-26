@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 
     } catch (error) {
         console.log(error);
-        res.status(500).json({ msg: "unable to save bmi data" });
+        res.status(500).json({ msg: "unable to find bmi data" });
     }
 })
 
