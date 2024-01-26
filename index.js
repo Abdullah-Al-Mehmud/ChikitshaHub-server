@@ -22,7 +22,7 @@ mongoose
 app.use("/doctors", doctorHandler);
 app.use("/users", userHandler);
 app.use("/bmi", bmiHandler);
-app.use("/appointment", appointmentHandler);
+app.use("/appointments", appointmentHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
