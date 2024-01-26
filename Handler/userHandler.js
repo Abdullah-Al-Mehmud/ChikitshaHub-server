@@ -32,8 +32,8 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newUser = new User(req.body);
-    const result = await newUser.save();
-    res.send(result);
+    await newUser.save();
+    res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to get single user data" });

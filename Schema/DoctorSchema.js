@@ -22,6 +22,12 @@ const doctorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  title: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
   specialties: [
     {
       type: String,
@@ -84,19 +90,6 @@ const doctorSchema = mongoose.Schema({
     type: experienceSchema,
     required: true,
   },
-
-  services: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  specializations: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
 });
 
 module.exports = doctorSchema;
