@@ -17,10 +17,10 @@ router.get("/", async (req, res) => {
 });
 
 // get data by id
-router.get("/:id", async (req, res) => {
+router.get("/:email", async (req, res) => {
   try {
-    const id = req.params.id;
-    const result = await User.findById(id);
+    const email = req.params.email;
+    const result = await User.find({ email: email });
     res.send(result);
   } catch (error) {
     console.log(error);

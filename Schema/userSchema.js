@@ -5,7 +5,7 @@ const userSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  photo: {
+  photoUrl: {
     type: String,
     required: true,
   },

@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const bmiSchema = mongoose.Schema({
   email: {
     type: String,
-    required: false,
+    required: true,
   },
   height: {
     type: Number,
