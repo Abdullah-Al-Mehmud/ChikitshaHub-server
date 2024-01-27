@@ -40,10 +40,6 @@ const doctorSchema = mongoose.Schema({
       required: true,
     },
   ],
-  category: {
-    type: String,
-    required: true,
-  },
   doctorCode: {
     type: String,
     required: true,
