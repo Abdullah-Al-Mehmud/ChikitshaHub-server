@@ -22,18 +22,24 @@ const doctorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  title: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  specialties: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
+  title: {
+    type: String,
+    required: true,
+  },
+  img: {
+    type: String,
+    required: true,
+  },
+  role: {
+    type: String,
+    required: true,
+  },
+
+  specialties: {
+    type: String,
+    required: true,
+  },
+
   degrees: [
     {
       type: String,
