@@ -34,7 +34,9 @@ router.post("/", async (req, res) => {
     const user = req.body;
     const query = await User.findOne({ email: user.email });
     if (query) {
-      res.status(201).send({ message: "user already exists " });
+      return res
+        .status(200)
+        .json({ message: "User already exists", success: false });
     }
 
     const newUser = new User(user);
