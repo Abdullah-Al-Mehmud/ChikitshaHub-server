@@ -26,7 +26,6 @@ app.use("/users", userHandler);
 app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/chat", chatHandler);
-// app.use("/messages", messageHandler);
 app.use("/messages", messageHandler);
 
 app.use("/", (req, res) => {
