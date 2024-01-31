@@ -10,6 +10,7 @@ const bmiHandler = require("./Handler/BMIHandler");
 const appointmentHandler = require("./Handler/AppointmentHandler");
 const chatHandler = require("./Handler/ChatHandler");
 const messageHandler = require("./Handler/MessageHandler");
+const sendEmailHandler = require("./Handler/SendEmailHandler");
 
 // middleware
 app.use(cors());
@@ -27,6 +28,7 @@ app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/chat", chatHandler);
 app.use("/messages", messageHandler);
+app.use("/sendEmail",sendEmailHandler );
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
