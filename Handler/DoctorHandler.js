@@ -32,7 +32,7 @@ router.get("/:id", async (req, res) => {
 router.get("/1/:category", async (req, res) => {
   try {
     const category = req.params.category;
-    const result = await Doctor.find({ category: category });
+    const result = await Doctor.find({ specialties: category });
     res.send(result);
   } catch (error) {
     console.log(error);

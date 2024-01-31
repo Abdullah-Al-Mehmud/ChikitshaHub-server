@@ -31,7 +31,15 @@ router.get("/:email", async (req, res) => {
 // post data
 router.post("/", async (req, res) => {
   try {
-    const newUser = new User(req.body);
+    const user = req.body;
+    const query = await User.findOne({ email: user.email });
+    if (query) {
+      return res
+        .status(200)
+        .json({ message: "User already exists", success: false });
+    }
+
+    const newUser = new User(user);
     await newUser.save();
     res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
