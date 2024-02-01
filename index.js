@@ -6,6 +6,8 @@ const app = express();
 const port = process.env.PORT || 3000;
 const doctorHandler = require("./Handler/DoctorHandler");
 
+const tipsHandler = require("./Handler/TipsHandler");
+
 // middleware
 app.use(cors());
 app.use(express.json());
@@ -17,6 +19,9 @@ mongoose
 
 // application routes
 app.use("/doctors", doctorHandler);
+
+//tips
+app.use("/tips", tipsHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
