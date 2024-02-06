@@ -11,6 +11,7 @@ const appointmentHandler = require("./Handler/AppointmentHandler");
 const chatHandler = require("./Handler/ChatHandler");
 const messageHandler = require("./Handler/MessageHandler");
 const sendEmailHandler = require("./Handler/SendEmailHandler");
+const stripeHandler = require("./Handler/StripeHandler");
 
 // middleware
 app.use(cors());
@@ -29,6 +30,7 @@ app.use("/appointments", appointmentHandler);
 app.use("/chat", chatHandler);
 app.use("/messages", messageHandler);
 app.use("/sendEmail",sendEmailHandler );
+app.use("/create-payment-intent", stripeHandler)
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
