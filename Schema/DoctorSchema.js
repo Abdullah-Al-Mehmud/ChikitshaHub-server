@@ -30,6 +30,10 @@ const doctorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  doctorEmail: {
+    type: String,
+    required: true,
+  },
   role: {
     type: String,
     required: true,
