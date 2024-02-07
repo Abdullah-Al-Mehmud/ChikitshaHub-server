@@ -1,34 +1,29 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const messageSchema = require("../Schema/MessageSchema");
+const router = require("express").Router();
+// const Message = require("../Schema/MessageSchema");
 
-const Message = new mongoose.model("Message", messageSchema);
+//add
 
-router.get("/:chatId", async (req, res) => {
+router.post("/", async (req, res) => {
+  const newMessage = new Message(req.body);
+
   try {
-    const { chatId } = req.params;
-    const result = await Message.find({ chatId });
-    res.send(result);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to save message data" });
+    const savedMessage = await newMessage.save();
+    res.status(200).json(savedMessage);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 
-router.post("/", async (req, res) => {
+//get
+
+router.get("/:conversationId", async (req, res) => {
   try {
-    const { chatId, senderEmail, text } = req.body;
-    const newMessage = new Message({
-      chatId,
-      senderEmail,
-      text,
+    const messages = await Message.find({
+      conversationId: req.params.conversationId,
     });
-    await newMessage.save();
-    res.status(201).send({ message: "added successfully ", success: true });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to save message data" });
+    res.status(200).json(messages);
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

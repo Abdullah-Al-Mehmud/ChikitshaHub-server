@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 3000;
+
 const doctorHandler = require("./Handler/DoctorHandler");
 const userHandler = require("./Handler/userHandler");
 const bmiHandler = require("./Handler/BMIHandler");
@@ -40,5 +41,6 @@ app.use("/tips", tipsHandler);
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
 });
+
 
 app.listen(port);

@@ -6,9 +6,7 @@ const chatSchema = mongoose.Schema(
       type: Array,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = chatSchema;

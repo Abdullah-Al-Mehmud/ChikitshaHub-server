@@ -1,42 +1,44 @@
-const express = require("express");
-const router = express.Router();
-const mongoose = require("mongoose");
-const chatSchema = require("../Schema/ChatSchema");
+const router = require("express").Router();
+const Conversation = require("../Schema/ChatSchema");
 
-const Chat = new mongoose.model("Chat", chatSchema);
-
-router.get("/:userEmail", async (req, res) => {
-  try {
-    const chat = await Chat.find({ members: { $in: [req.params.userEmail] } });
-    res.send(chat);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to save chat data" });
-  }
-});
-
-router.get("/find/:firstEmail/:secondEmail", async (req, res) => {
-  try {
-    const chat = await Chat.findOne({
-      members: { $all: [req.params.firstEmail, req.params.secondEmail] },
-    });
-    res.send(chat);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to save chat data" });
-  }
-});
+//new conv
 
 router.post("/", async (req, res) => {
+  const newConversation = new Conversation({
+    members: [req.body.senderId, req.body.receiverId],
+  });
+
   try {
-    const newChat = new Chat({
-      members: [req.body.senderEmail, req.body.receiverEmail],
+    const savedConversation = await newConversation.save();
+    res.status(200).json(savedConversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+//get conv of a user
+
+router.get("/:userId", async (req, res) => {
+  try {
+    const conversation = await Conversation.find({
+      members: { $in: [req.params.userId] },
     });
-    await newChat.save();
-    res.status(201).send({ message: "added successfully ", success: true });
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({ msg: "unable to save chat data" });
+    res.status(200).json(conversation);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
+// get conv includes two userId
+
+router.get("/find/:firstUserId/:secondUserId", async (req, res) => {
+  try {
+    const conversation = await Conversation.findOne({
+      members: { $all: [req.params.firstUserId, req.params.secondUserId] },
+    });
+    res.status(200).json(conversation)
+  } catch (err) {
+    res.status(500).json(err);
   }
 });
 

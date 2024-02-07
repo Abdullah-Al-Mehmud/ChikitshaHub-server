@@ -2,19 +2,17 @@ const mongoose = require("mongoose");
 
 const messageSchema = new mongoose.Schema(
   {
-    chatId: {
+    conversationId: {
       type: String,
     },
-    senderEmail: {
+    sender: {
       type: String,
     },
     text: {
       type: String,
     },
   },
-  {
-    timestamps: true,
-  }
+  { timestamps: true }
 );
 
 module.exports = messageSchema;
