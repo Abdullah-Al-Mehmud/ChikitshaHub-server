@@ -1,5 +1,5 @@
 const router = require("express").Router();
-// const Message = require("../Schema/MessageSchema");
+const Message = require("../Schema/MessageSchema");
 
 //add
 
