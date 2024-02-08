@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
-require("dotenv").config();
+require("dotenv").config({ path: ".env.local" });
 const app = express();
 const port = process.env.PORT || 3000;
 const doctorHandler = require("./Handler/DoctorHandler");
@@ -31,8 +31,8 @@ app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/chat", chatHandler);
 app.use("/messages", messageHandler);
-app.use("/sendEmail",sendEmailHandler );
-app.use("/create-payment-intent", stripeHandler)
+app.use("/sendEmail", sendEmailHandler);
+app.use("/create-payment-intent", stripeHandler);
 
 //tips
 app.use("/tips", tipsHandler);

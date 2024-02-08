@@ -40,11 +40,7 @@ router.get("/search", async (req, res) => {
 
     if (searchTerm) {
       const regex = new RegExp(searchTerm, "i");
-      query.$or = [
-        { name: regex },
-        { specialties: regex },
-        { location: regex },
-      ];
+      query.$or = [{ name: regex }, { specialty: regex }, { location: regex }];
     }
     if (location) {
       query.location = location;
