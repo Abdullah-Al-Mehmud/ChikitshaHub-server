@@ -11,7 +11,7 @@ router.get("/:chatId", async (req, res) => {
     const result = await Message.find({ chatId });
     res.send(result);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save message data" });
   }
 });
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     await newMessage.save();
     res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save message data" });
   }
 });

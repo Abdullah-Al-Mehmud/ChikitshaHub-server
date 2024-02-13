@@ -10,7 +10,7 @@ router.get("/:userEmail", async (req, res) => {
     const chat = await Chat.find({ members: { $in: [req.params.userEmail] } });
     res.send(chat);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save chat data" });
   }
 });
@@ -22,7 +22,7 @@ router.get("/find/:firstEmail/:secondEmail", async (req, res) => {
     });
     res.send(chat);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save chat data" });
   }
 });
@@ -35,7 +35,7 @@ router.post("/", async (req, res) => {
     await newChat.save();
     res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save chat data" });
   }
 });

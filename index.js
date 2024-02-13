@@ -15,8 +15,14 @@ const stripeHandler = require("./Handler/StripeHandler");
 
 const tipsHandler = require("./Handler/TipsHandler");
 
+const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
+const corsOptions = {
+  origin: ["http://localhost:5173", "http://localhost:5174"],
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 // middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 
 mongoose
@@ -36,6 +42,7 @@ app.use("/create-payment-intent", stripeHandler);
 
 //tips
 app.use("/tips", tipsHandler);
+app.use("/specialities", SpecialitiesHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
