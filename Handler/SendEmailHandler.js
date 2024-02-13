@@ -26,10 +26,10 @@ router.get("/users", async (req, res) => {
         subject: "New Tips From ChikitshaHub",
         message: Tips.heading,
       };
-      console.log(user.email);
+      // console.log(user.email);
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.log("Error", error);
+          // console.log("Error", error);
         } else {
           console.log("Email sent" + info.response);
           res.status(201).json({ status: 201, info });
