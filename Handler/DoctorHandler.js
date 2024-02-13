@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     const result = await Doctor.find();
     res.send(result);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to get doctor data" });
   }
 });
@@ -40,11 +40,7 @@ router.get("/search", async (req, res) => {
 
     if (searchTerm) {
       const regex = new RegExp(searchTerm, "i");
-      query.$or = [
-        { name: regex },
-        { specialties: regex },
-        { location: regex },
-      ];
+      query.$or = [{ name: regex }, { specialty: regex }, { location: regex }];
     }
     if (location) {
       query.location = location;
@@ -64,7 +60,7 @@ router.get("/search", async (req, res) => {
       totalDoctors,
     });
   } catch (error) {
-    console.error("Error while fetching doctors:", error);
+    // console.error("Error while fetching doctors:", error);
 
     if (error.name === "ValidationError") {
       res.status(400).json({ message: "Invalid request parameters" });
@@ -81,7 +77,7 @@ router.get("/:id", async (req, res) => {
     const result = await Doctor.findById(id);
     res.send(result);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to get single doctor data" });
   }
 });

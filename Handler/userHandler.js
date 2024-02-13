@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     const result = await User.find();
     res.send(result);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to get user data" });
   }
 });

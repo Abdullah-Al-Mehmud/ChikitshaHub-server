@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
+const cookieParser = require('cookie-parser');
 const app = express();
 
 const doctorHandler = require("./Handler/DoctorHandler");
@@ -13,9 +14,16 @@ const stripeHandler = require("./Handler/StripeHandler");
 const tipsHandler = require("./Handler/TipsHandler");
 const jwtHandler = require("./Handler/JwtHandler");
 
+const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
+const corsOptions = {
+  origin: ["http://localhost:5173", "http://localhost:5174"],
+  credentials: true,
+  optionSuccessStatus: 200,
+};
 // middleware
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
+app.use(cookieParser());
 
 
 mongoose
@@ -34,6 +42,7 @@ app.use("/jwt", jwtHandler);
 
 //tips
 app.use("/tips", tipsHandler);
+app.use("/specialities", SpecialitiesHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
