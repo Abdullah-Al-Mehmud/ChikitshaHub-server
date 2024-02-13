@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const mongoose = require('mongoose');
-// const StripeSchema = require('../Schema/StripeSchema');
-// const Stripe = new mongoose.model('Stripe', StripeSchema);
+const StripeSchema = require('../Schema/StripeSchema');
+const Stripe = new mongoose.model('Stripe', StripeSchema);
 const stripeKey = require('stripe')(process.env.STRIPE_SECRET_KEY);
 
 
@@ -18,7 +18,7 @@ router.post('/', async (req, res) => {
             currency: "usd",
             payment_method_types: ["card"]
         });
-        console.log(paymentIntent)
+        // console.log(paymentIntent)
         res.send({
             clientSecret: paymentIntent.client_secret
         })
