@@ -18,10 +18,10 @@ router.get("/:chatId", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
-    const { chatId, senderId, text } = req.body;
+    const { chatId, senderEmail, text } = req.body;
     const newMessage = new Message({
       chatId,
-      senderId,
+      senderEmail,
       text,
     });
     await newMessage.save();

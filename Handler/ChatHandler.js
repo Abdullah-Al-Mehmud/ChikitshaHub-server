@@ -5,9 +5,9 @@ const chatSchema = require("../Schema/ChatSchema");
 
 const Chat = new mongoose.model("Chat", chatSchema);
 
-router.get("/:userId", async (req, res) => {
+router.get("/:userEmail", async (req, res) => {
   try {
-    const chat = await Chat.find({ members: { $in: [req.params.userId] } });
+    const chat = await Chat.find({ members: { $in: [req.params.userEmail] } });
     res.send(chat);
   } catch (error) {
     console.log(error);
@@ -15,10 +15,10 @@ router.get("/:userId", async (req, res) => {
   }
 });
 
-router.get("/find/:firstId/:secondId", async (req, res) => {
+router.get("/find/:firstEmail/:secondEmail", async (req, res) => {
   try {
     const chat = await Chat.findOne({
-      members: { $all: [req.params.firstId, req.params.secondId] },
+      members: { $all: [req.params.firstEmail, req.params.secondEmail] },
     });
     res.send(chat);
   } catch (error) {
@@ -30,7 +30,7 @@ router.get("/find/:firstId/:secondId", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
     const newChat = new Chat({
-      members: [req.body.senderId, req.body.receiverId],
+      members: [req.body.senderEmail, req.body.receiverEmail],
     });
     await newChat.save();
     res.status(201).send({ message: "added successfully ", success: true });
