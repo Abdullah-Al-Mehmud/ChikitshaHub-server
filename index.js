@@ -3,7 +3,6 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 const app = express();
-const port = process.env.PORT || 3000;
 
 const doctorHandler = require("./Handler/DoctorHandler");
 const userHandler = require("./Handler/userHandler");
@@ -17,8 +16,11 @@ const stripeHandler = require("./Handler/StripeHandler");
 const tipsHandler = require("./Handler/TipsHandler");
 
 // middleware
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:5173'
+}));
 app.use(express.json());
+
 
 mongoose
   .connect(process.env.URI)
@@ -43,4 +45,9 @@ app.use("/", (req, res) => {
 });
 
 
-app.listen(port);
+const port = process.env.PORT || 3000;
+
+
+app.listen(port, () => {
+  console.log(`server is running on: ${port}`)
+});
