@@ -4,6 +4,7 @@ const router = express.Router();
 const userSchema = require("../Schema/userSchema");
 const { verifyToken } = require("../middleware/VerifyToken");
 const { verifyAdmin } = require("../middleware/VerifyAdmin");
+const { verifyDoctor } = require("../middleware/VerifyDoctor");
 
 const User = new mongoose.model("User", userSchema);
 
@@ -56,10 +57,22 @@ router.get('/admin/:email', verifyToken, verifyAdmin, async (req, res) => {
     return res.status(403).send({ message: "forbidden access" })
   }
   const query = { email: email };
-  const user = await userCollections.findOne(query);
+  const user = await User.findOne(query);
 
   const isAdmin = (user?.role === 'admin' ? true : false);
   res.send({ isAdmin })
+})
+
+router.get('/doctor/:email', verifyToken, verifyDoctor, async (req, res) => {
+  const email = req.params.email;
+  if (email !== req.decoded.email) {
+    return res.status(403).send({ message: "forbidden access" })
+  }
+  const query = { email: email };
+  const user = await User.findOne(query);
+
+  const isDoctor = (user?.role === 'doctor' ? true : false);
+  res.send({ isDoctor })
 })
 
 module.exports = router;
