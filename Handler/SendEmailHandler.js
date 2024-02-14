@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-router.get("/users", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const users = await User.find(); // Fetch all users from MongoDB
     const tips = await Tips.find(); // fetch all tips from mongodb
