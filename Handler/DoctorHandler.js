@@ -8,13 +8,26 @@ const Doctor = new mongoose.model("Doctor", DoctorSchema);
 // get your all doctors documents
 router.get("/", async (req, res) => {
   try {
-    const result = await Doctor.find();
+    let query = { status: "verify" };
+    const result = await Doctor.find(query);
     res.send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to get doctor data" });
   }
 });
+// req for all doctors
+router.get("/admin/docReq", async (req, res) => {
+  try {
+    let query = { status: "pending" };
+    const result = await Doctor.find(query);
+    res.send(result);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to get doctor data" });
+  }
+});
+//
 
 router.get("/search", async (req, res) => {
   try {
@@ -107,6 +120,34 @@ router.post("/", async (req, res) => {
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to save doctor data" });
+  }
+});
+
+router.patch("/admin/setStatus/:id", async (req, res) => {
+  try {
+    const result = await Doctor.updateOne(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          status: "verify",
+        },
+      }
+    );
+    if (result.modifiedCount === 1) {
+      res.status(201).send({
+        message: "updated successfully ",
+        success: true,
+        modifiedCount: result.modifiedCount,
+      });
+    }
+  } catch (error) {
+    res.status(400).send({
+      message: "Document not found or not modified",
+      success: false,
+      modifiedCount: result.modifiedCount,
+    });
   }
 });
 
