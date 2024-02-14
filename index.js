@@ -13,8 +13,9 @@ const sendEmailHandler = require("./Handler/SendEmailHandler");
 const stripeHandler = require("./Handler/StripeHandler");
 const tipsHandler = require("./Handler/TipsHandler");
 const jwtHandler = require("./Handler/JwtHandler");
-
+const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
+
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true,
@@ -39,6 +40,7 @@ app.use("/appointments", appointmentHandler);
 app.use("/sendEmail",sendEmailHandler );
 app.use("/create-payment-intent", stripeHandler);
 app.use("/jwt", jwtHandler);
+app.use("/logout", logoutHandler);
 
 //tips
 app.use("/tips", tipsHandler);
