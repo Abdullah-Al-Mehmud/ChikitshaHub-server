@@ -16,7 +16,7 @@ router.get("/", async (req, res) => {
     res.status(500).json({ msg: "unable to get doctor data" });
   }
 });
-// req for all doctors
+// req for pending doctors
 router.get("/admin/docReq", async (req, res) => {
   try {
     let query = { status: "pending" };
