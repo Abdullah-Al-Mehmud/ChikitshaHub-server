@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../Schema/userSchema");
+const { verifyToken } = require("../middleware/VerifyToken");
+const { verifyAdmin } = require("../middleware/VerifyAdmin");
 
 const User = new mongoose.model("User", userSchema);
 
@@ -47,5 +49,17 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "unable to get single user data" });
   }
 });
+
+router.get('/admin/:email', verifyToken, verifyAdmin, async (req, res) => {
+  const email = req.params.email;
+  if (email !== req.decoded.email) {
+    return res.status(403).send({ message: "forbidden access" })
+  }
+  const query = { email: email };
+  const user = await userCollections.findOne(query);
+
+  const isAdmin = (user?.role === 'admin' ? true : false);
+  res.send({ isAdmin })
+})
 
 module.exports = router;
