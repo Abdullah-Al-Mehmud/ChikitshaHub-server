@@ -18,18 +18,18 @@ const transporter = nodemailer.createTransport({
 router.get("/users", async (req, res) => {
   try {
     const users = await User.find(); // Fetch all users from MongoDB
-    const Tips = await Tips.find(); // fetch all tips from mongodb
+    const tips = await Tips.find(); // fetch all tips from mongodb
     users.forEach((user) => {
       const mailOptions = {
         from: process.env.Email,
         to: user.email,
         subject: "New Tips From ChikitshaHub",
-        message: Tips.heading,
+        message: tips.heading,
       };
-      console.log(user.email);
+      // console.log(user.email);
       transporter.sendMail(mailOptions, (error, info) => {
         if (error) {
-          console.log("Error", error);
+          // console.log("Error", error);
         } else {
           console.log("Email sent" + info.response);
           res.status(201).json({ status: 201, info });
