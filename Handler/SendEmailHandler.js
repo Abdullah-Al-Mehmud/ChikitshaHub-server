@@ -17,7 +17,6 @@ router.post("/", async (req, res) => {
 
     const newEmail = new sendEmail({ heading, photoURL, description });
     // await newEmail.save();
-    console.log(newEmail);
 
     const transporter = nodemailer.createTransport({
       service: "gmail",
