@@ -5,7 +5,7 @@ const medicineSchema =require('../Schema/MedicineSchema')
 const Medicine = new mongoose.model("Medicine", medicineSchema);
 
 //post medicine
-/* router.post('/', async(req, res)=>{
+router.post('/', async(req, res)=>{
     try {
         const newMedicine = new Medicine(req.body);
         await newMedicine.save();
@@ -14,6 +14,6 @@ const Medicine = new mongoose.model("Medicine", medicineSchema);
         console.log(error);
         res.status(500).json({ msg: "unable to save medicine data" });
       }
-}) */
+})
 
 module.exports = router;

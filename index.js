@@ -37,7 +37,7 @@ app.use("/sendEmail",sendEmailHandler );
 app.use("/tips", tipsHandler);
 
 //medicines
-//app.use("/medicines", medicinesHandler);
+app.use("/medicines", medicinesHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
