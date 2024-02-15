@@ -79,6 +79,33 @@ router.patch("/admin/setRole/:id", async (req, res) => {
     });
   }
 });
+router.patch("/admin/setDocRole/:id", async (req, res) => {
+  try {
+    const result = await User.updateOne(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          role: "doctor",
+        },
+      }
+    );
+    if (result.modifiedCount === 1) {
+      res.status(201).send({
+        message: "updated successfully ",
+        success: true,
+        modifiedCount: result.modifiedCount,
+      });
+    }
+  } catch (error) {
+    res.status(400).send({
+      message: "Document not found or not modified",
+      success: false,
+      modifiedCount: result.modifiedCount,
+    });
+  }
+});
 
 // delete
 router.delete("/:id", async (req, res) => {

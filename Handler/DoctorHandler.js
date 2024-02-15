@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const DoctorSchema = require("../Schema/DoctorSchema");
+const { deleteMiddleware } = require("../middleware/crudMiddleware");
 
 const Doctor = new mongoose.model("Doctor", DoctorSchema);
 
@@ -198,5 +199,32 @@ router.patch("/admin/setStatus/:id", async (req, res) => {
     });
   }
 });
-
+router.patch("/admin/statusUpdate/:id", async (req, res) => {
+  try {
+    const result = await Doctor.updateOne(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          status: "verify",
+        },
+      }
+    );
+    if (result.modifiedCount === 1) {
+      res.status(201).send({
+        message: "updated successfully ",
+        success: true,
+        modifiedCount: result.modifiedCount,
+      });
+    }
+  } catch (error) {
+    res.status(400).send({
+      message: "Document not found or not modified",
+      success: false,
+      modifiedCount: result.modifiedCount,
+    });
+  }
+});
+router.delete("/admin/docDelete/:id", deleteMiddleware(Doctor));
 module.exports = router;
