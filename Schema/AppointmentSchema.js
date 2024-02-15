@@ -25,10 +25,10 @@ const appointmentSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  fee:{
+  fee: {
     type: Number,
     required: true,
-  }
+  },
 });
 
 module.exports = appointmentSchema;
