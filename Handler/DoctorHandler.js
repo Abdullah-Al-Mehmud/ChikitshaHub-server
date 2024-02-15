@@ -207,7 +207,7 @@ router.patch("/admin/statusUpdate/:id", async (req, res) => {
       },
       {
         $set: {
-          status: "verify",
+          status: "verified",
         },
       }
     );
