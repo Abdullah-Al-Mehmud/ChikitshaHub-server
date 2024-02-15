@@ -16,11 +16,15 @@ router.get("/", async (req, res) => {
   }
 });
 
+
+
+
 // post the appointment data
 router.post("/", async (req, res) => {
   try {
     const newAppointment = new Appointment(req.body);
     await newAppointment.save();
+    console.log(newAppointment);
     res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
     // console.log(error);
