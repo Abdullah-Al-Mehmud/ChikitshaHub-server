@@ -1,7 +1,7 @@
 const express = require('express');
 const mongoose = require("mongoose");
 const router = express.Router();
-const tipsSchema = require('../schemas/tipsSchema');
+const tipsSchema = require('../Schema/TipsSchema');
 const Tip = new mongoose.model("Tip", tipsSchema);
 
 

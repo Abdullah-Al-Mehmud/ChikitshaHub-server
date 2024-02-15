@@ -13,6 +13,7 @@ const messageHandler = require("./Handler/MessageHandler");
 const sendEmailHandler = require("./Handler/SendEmailHandler");
 
 const tipsHandler = require("./Handler/TipsHandler");
+const medicinesHandler = require("./Handler/medicinesHandler")
 
 // middleware
 app.use(cors());
@@ -34,6 +35,9 @@ app.use("/sendEmail",sendEmailHandler );
 
 //tips
 app.use("/tips", tipsHandler);
+
+//medicines
+//app.use("/medicines", medicinesHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
