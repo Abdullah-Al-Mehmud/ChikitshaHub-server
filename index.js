@@ -12,10 +12,12 @@ const appointmentHandler = require("./Handler/AppointmentHandler");
 const sendEmailHandler = require("./Handler/SendEmailHandler");
 const stripeHandler = require("./Handler/StripeHandler");
 const tipsHandler = require("./Handler/TipsHandler");
+const medicinesHandler = require("./Handler/medicinesHandler")
 const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
 
+// middleware
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
   credentials: true,
@@ -45,6 +47,9 @@ app.use("/logout", logoutHandler);
 //tips
 app.use("/tips", tipsHandler);
 app.use("/specialities", SpecialitiesHandler);
+
+//medicines
+app.use("/medicines", medicinesHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
