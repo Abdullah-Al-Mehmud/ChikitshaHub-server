@@ -15,6 +15,7 @@ const tipsHandler = require("./Handler/TipsHandler");
 const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
+const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
 
 const corsOptions = {
   origin: ["http://localhost:5173", "http://localhost:5174"],
@@ -37,6 +38,7 @@ app.use("/users", userHandler);
 app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/sendEmail", sendEmailHandler);
+app.use("/doctorReview", doctorReviewHandler);
 app.use("/create-payment-intent", stripeHandler);
 app.use("/jwt", jwtHandler);
 app.use("/logout", logoutHandler);
