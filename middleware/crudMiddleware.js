@@ -70,8 +70,8 @@ const updateMiddleware = (Model) => async (req, res, next) => {
 // Delete middleware
 const deleteMiddleware = (Model) => async (req, res, next) => {
   try {
-    await Model.findByIdAndDelete(req.params.id);
-    res.json({ message: "Instance deleted successfully" });
+    const result = await Model.findByIdAndDelete(req.params.id);
+    res.send(result);
   } catch (error) {
     next(error);
   }
