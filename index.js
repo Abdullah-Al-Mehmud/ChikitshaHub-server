@@ -18,7 +18,7 @@ const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
 const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
 
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174"],
+  origin: ["http://localhost:5173", "http://localhost:5174", "https://hilarious-wisp-3febc2.netlify.app/"],
   credentials: true,
   optionSuccessStatus: 200,
 };
