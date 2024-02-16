@@ -14,6 +14,16 @@ router.get("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save tips data" });
   }
 });
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Tip.findById(id);
+    res.send(result);
+  } catch (error) {
+    // console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
+  }
+});
 //post tips
 router.post("/", async (req, res) => {
   try {
