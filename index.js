@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
-const cookieParser = require('cookie-parser');
+const cookieParser = require("cookie-parser");
 const app = express();
 
 const doctorHandler = require("./Handler/DoctorHandler");
@@ -28,7 +28,6 @@ app.use(cors(corsOptions));
 app.use(express.json());
 app.use(cookieParser());
 
-
 mongoose
   .connect(process.env.URI)
   .then(() => console.log("connected successful"))
@@ -39,7 +38,7 @@ app.use("/doctors", doctorHandler);
 app.use("/users", userHandler);
 app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
-app.use("/sendEmail",sendEmailHandler );
+app.use("/sendEmail", sendEmailHandler);
 app.use("/create-payment-intent", stripeHandler);
 app.use("/jwt", jwtHandler);
 app.use("/logout", logoutHandler);
@@ -55,10 +54,8 @@ app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
 });
 
-
 const port = process.env.PORT || 3000;
 
-
 app.listen(port, () => {
-  console.log(`server is running on: ${port}`)
+  console.log(`server is running on: ${port}`);
 });
