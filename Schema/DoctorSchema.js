@@ -30,7 +30,7 @@ const doctorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  role: {
+  status: {
     type: String,
     required: true,
   },

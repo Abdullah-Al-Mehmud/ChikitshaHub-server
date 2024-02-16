@@ -11,7 +11,7 @@ router.get("/", async (req, res) => {
     const { email } = req.query;
     const result = await Bmi.find({ email });
     res.send(result);
-    console.log(result);
+    // console.log(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to find bmi data" });
@@ -40,7 +40,7 @@ router.post("/", async (req, res) => {
     // res.send(result);
     res.status(201).send({ message: "added successfully ", success: true });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save bmi data" });
   }
 });

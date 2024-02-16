@@ -2,6 +2,9 @@ const mongoose = require("mongoose");
 const express = require("express");
 const router = express.Router();
 const userSchema = require("../Schema/userSchema");
+const { verifyToken } = require("../middleware/VerifyToken");
+const { verifyAdmin } = require("../middleware/VerifyAdmin");
+const { verifyDoctor } = require("../middleware/VerifyDoctor");
 
 const User = new mongoose.model("User", userSchema);
 
@@ -11,7 +14,7 @@ router.get("/", async (req, res) => {
     const result = await User.find();
     res.send(result);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to get user data" });
   }
 });
@@ -46,6 +49,74 @@ router.post("/", async (req, res) => {
     console.log(error);
     res.status(500).json({ msg: "unable to get single user data" });
   }
+});
+
+// set as admin
+router.patch("/admin/setRole/:id", async (req, res) => {
+  try {
+    const result = await User.updateOne(
+      {
+        _id: req.params.id,
+      },
+      {
+        $set: {
+          role: "admin",
+        },
+      }
+    );
+    if (result.modifiedCount === 1) {
+      res.status(201).send({
+        message: "updated successfully ",
+        success: true,
+        modifiedCount: result.modifiedCount,
+      });
+    }
+  } catch (error) {
+    res.status(400).send({
+      message: "Document not found or not modified",
+      success: false,
+      modifiedCount: result.modifiedCount,
+    });
+  }
+});
+
+// delete
+router.delete("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    result = await User.deleteOne({ _id: id });
+    if (result.deletedCount === 1) {
+      res.status(201).send({ success: true });
+    }
+  } catch (e) {
+    res.status(400).send(e);
+  }
+});
+router.get("/admin/:email", verifyToken, verifyAdmin, async (req, res) => {
+  const email = req.params.email;
+  if (email !== req.decoded.email) {
+    return res.status(403).send({ message: "forbidden access" });
+  }
+  const query = { email: email };
+  const user = await User.findOne(query);
+
+  const isAdmin = user?.role === "admin" ? true : false;
+
+  console.log(isAdmin);
+
+  res.send({ isAdmin });
+});
+
+router.get("/doctor/:email", verifyToken, verifyDoctor, async (req, res) => {
+  const email = req.params.email;
+  if (email !== req.decoded.email) {
+    return res.status(403).send({ message: "forbidden access" });
+  }
+  const query = { email: email };
+  const user = await User.findOne(query);
+
+  const isDoctor = user?.role === "doctor" ? true : false;
+  res.send({ isDoctor });
 });
 
 module.exports = router;
