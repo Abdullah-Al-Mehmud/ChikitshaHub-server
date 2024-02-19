@@ -4,37 +4,48 @@ require("dotenv").config();
 const router = express.Router();
 
 const nodemailer = require("nodemailer");
-const User = require("./userHandler");
-const Tips = require("./TipsHandler");
+const UserSchema = require("../Schema/userSchema");
+// const Tips = require("./TipsHandler");
+const sendEmailSchema = require("../Schema/SendEmailSchema");
 
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.Email,
-    pass: process.env.PASS,
-  },
-});
+const sendEmail = new mongoose.model("sendEmail", sendEmailSchema);
+const User = mongoose.model("User", UserSchema);
 
-router.get("/users", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    const users = await User.find(); // Fetch all users from MongoDB
-    const Tips = await Tips.find(); // fetch all tips from mongodb
-    users.forEach((user) => {
-      const mailOptions = {
-        from: process.env.Email,
-        to: user.email,
-        subject: "New Tips From ChikitshaHub",
-        message: Tips.heading,
-      };
-      console.log(user.email);
-      transporter.sendMail(mailOptions, (error, info) => {
-        if (error) {
-          console.log("Error", error);
-        } else {
-          console.log("Email sent" + info.response);
-          res.status(201).json({ status: 201, info });
-        }
-      });
+    const { heading, photoURL, description } = req.body;
+
+    const newEmail = new sendEmail({ heading, photoURL, description });
+    await newEmail.save();
+
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.Email,
+        pass: process.env.PASS,
+      },
+    });
+
+    const users = await User.find({}, "email");
+
+    const mailOptions = {
+      from: process.env.Email,
+      to: users.map((user) => user.email),
+      subject: "New Tips From ChikitshaHub",
+      message: `${heading}`,
+      html: `<p>A new Tips <strong>"${heading}"</strong> has been published. Read it now!</p>`,
+    };
+
+    transporter.sendMail(mailOptions, (error, info) => {
+      if (error) {
+        console.error("Error sending email:", error);
+        res
+          .status(500)
+          .json({ success: false, message: "Error sending email" });
+      } else {
+        console.log("Email sent:", info.response);
+        res.status(201).json({ success: true, email: newEmail });
+      }
     });
   } catch (error) {
     console.log(error);

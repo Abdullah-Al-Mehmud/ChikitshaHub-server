@@ -10,8 +10,18 @@ router.get("/", async (req, res) => {
     const tip = await Tip.find();
     res.send(tip);
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save tips data" });
+  }
+});
+router.get("/:id", async (req, res) => {
+  try {
+    const id = req.params.id;
+    const result = await Tip.findById(id);
+    res.send(result);
+  } catch (error) {
+    // console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
   }
 });
 //post tips
@@ -21,7 +31,7 @@ router.post("/", async (req, res) => {
     await newTip.save();
     res.status(201).send({ message: "Send successfully ", success: true });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).json({ msg: "unable to save Tips data" });
   }
 });
