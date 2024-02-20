@@ -19,9 +19,14 @@ router.post("/", async (req, res) => {
     await newEmail.save();
 
     const transporter = nodemailer.createTransport({
+      host: [
+        "http://localhost:5173",
+        "http://localhost:5174",
+        "https://hilarious-wisp-3febc2.netlify.app",
+      ],
       service: "gmail",
       auth: {
-        user: process.env.Email,
+        user: process.env.EMAIL,
         pass: process.env.PASS,
       },
     });
@@ -29,10 +34,10 @@ router.post("/", async (req, res) => {
     const users = await User.find({}, "email");
 
     const mailOptions = {
-      from: process.env.Email,
+      from: process.env.EMAIL,
       to: users.map((user) => user.email),
       subject: "New Tips From ChikitshaHub",
-      message: `${heading}`,
+      text: `${heading}`,
       html: `<p>A new Tips <strong>"${heading}"</strong> has been published. Read it now!</p>`,
     };
 
