@@ -16,6 +16,18 @@ const medicineSubSchema = mongoose.Schema({
 });
 
 const medicineSchema = mongoose.Schema({
+    doctorName: {
+        type: String,
+        required: true,
+    },
+    doctorEmail: {
+        type: String,
+        required: true,
+    },
+    patientEmail: {
+        type: String,
+        required: true,
+    },
     patientName: {
         type: String,
         required: true,
