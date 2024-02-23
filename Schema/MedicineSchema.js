@@ -32,10 +32,10 @@ const medicineSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
-  },
+  // address: {
+  //   type: String,
+  //   required: true,
+  // },
   age: {
     type: String,
     required: true,
@@ -45,6 +45,10 @@ const medicineSchema = mongoose.Schema({
     required: true,
   },
   medicines: [medicineSubSchema],
+  meetingId: {
+    type: String,
+    required: true,
+  },
 });
 
 module.exports = medicineSchema;
