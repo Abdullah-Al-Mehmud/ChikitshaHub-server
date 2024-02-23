@@ -46,7 +46,11 @@ const medicineSchema = mongoose.Schema({
     },
     medicines: [
         medicineSubSchema
-    ]
+    ],
+    meetingId:{
+        type: String,
+        required: true
+    }
 });
 
 module.exports = medicineSchema;
