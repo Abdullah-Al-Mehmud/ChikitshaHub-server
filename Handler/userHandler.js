@@ -52,21 +52,21 @@ router.post("/", async (req, res) => {
 });
 
 // set as admin
-router.patch("/admin/setRole/:id", async (req, res) => {
+router.patch("/setAdminRole/:id", async (req, res) => {
   try {
     const result = await User.updateOne(
       {
-        _id: req.params.id,
+        email: req.params.email,
       },
       {
         $set: {
-          role: "admin",
+          role: "doctor",
         },
       }
     );
     if (result.modifiedCount === 1) {
       res.status(201).send({
-        message: "updated successfully ",
+        message: "User role updated successfully",
         success: true,
         modifiedCount: result.modifiedCount,
       });
@@ -80,10 +80,47 @@ router.patch("/admin/setRole/:id", async (req, res) => {
   }
 });
 
-// delete
+router.patch("/setDocRole/:email", async (req, res) => {
+  try {
+    const result = await User.updateOne(
+      {
+        email: req.params.email,
+      },
+      {
+        $set: {
+          role: "doctor",
+        },
+      }
+    );
+    console.log(result);
+    res.send(result);
+    // if (result.nModified === 1) {
+    //   return res.status(200).json({
+    //     message: "User role updated successfully",
+    //     success: true,
+    //     modifiedCount: result.nModified,
+    //   });
+    // } else {
+    //   return res.status(404).json({
+    //     message: "User not found or not modified",
+    //     success: false,
+    //     modifiedCount: result.nModified,
+    //   });
+    // }
+  } catch (error) {
+    console.error("Error updating user role:", error);
+    return res.status(500).json({
+      message: "Internal Server Error",
+      success: false,
+      error: error.message,
+    });
+  }
+});
+
 router.delete("/:id", async (req, res) => {
   try {
     const id = req.params.id;
+    console.log(id);
     result = await User.deleteOne({ _id: id });
     if (result.deletedCount === 1) {
       res.status(201).send({ success: true });
@@ -116,7 +153,9 @@ router.get("/doctor/:email", verifyToken, verifyDoctor, async (req, res) => {
   const user = await User.findOne(query);
 
   const isDoctor = user?.role === "doctor" ? true : false;
+  console.log(isDoctor);
   res.send({ isDoctor });
 });
 
 module.exports = router;
+// doctor
