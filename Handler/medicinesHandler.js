@@ -39,6 +39,17 @@ router.get("/:email", async (req, res) => {
     res.status(500).json({ msg: "unable to save medicine data" });
   }
 });
+router.get("/:meetingId", async (req, res) => {
+  try {
+    const meetingId = req.params.meetingId;
+    console.log(meetingId);
+    const medicine = await Medicine.findOne({ meetingId: meetingId });
+    res.send(medicine);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to save medicine data" });
+  }
+});
 
 /* router.post('/', async(req, res) => {
   try {

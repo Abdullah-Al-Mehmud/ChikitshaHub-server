@@ -20,10 +20,10 @@ const medicineSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  address: {
-    type: String,
-    required: true,
-  },
+  // address: {
+  //   type: String,
+  //   required: true,
+  // },
   age: {
     type: String,
     required: true,
