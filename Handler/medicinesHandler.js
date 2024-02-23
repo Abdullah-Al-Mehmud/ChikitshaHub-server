@@ -27,22 +27,15 @@ router.get('/', async(req, res)=>{
   }
 })
 
-/* router.post('/', async(req, res) => {
+// get data by id
+router.get("/:meetingId", async (req, res) => {
   try {
-      const newMedicine = new Medicine({
-          patientName: req.body.patientName,
-          address: req.body.address,
-          age: req.body.age,
-          date: req.body.date,
-          medicines: req.body.medicines,
-      });
-      await newMedicine.save();
-      res.status(201).send({ message: "Send successfully ", success: true });
+    const id = req.params.meetingId;
+    const result = await medicines.findOne(meetingId);
+    res.send(result);
   } catch (error) {
-      console.log(error);
-      res.status(500).json({ msg: "unable to save medicine data" });
+    // console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
   }
 });
- */
-
 module.exports = router;
