@@ -58,7 +58,7 @@ router.get("/:email", async (req, res) => {
     res.status(500).json({ msg: "unable to save medicine data" });
   }
 });
-router.get("/:meetingId", async (req, res) => {
+/* router.get("/:meetingId", async (req, res) => {
   try {
     const meetingId = req.params.meetingId;
     // console.log(meetingId);
@@ -70,18 +70,19 @@ router.get("/:meetingId", async (req, res) => {
     console.log(error);
     res.status(500).json({ msg: "unable to save medicine data" });
   }
-});
+}); */
 
-// get data by id
-router.get("/:meetingId", async (req, res) => {
+router.get("/meeting/:meetingId", async (req, res) => {
   try {
-    const id = req.params.meetingId;
-    const result = await medicines.findOne(meetingId);
-    res.send(result);
+    const meetingId = req.params.meetingId;
+    console.log(meetingId)
+    const medicine = await Medicine.find({ meetingId: meetingId });
+    res.send(medicine);
   } catch (error) {
-    // console.log(error);
-    res.status(500).json({ msg: "unable to get single doctor data" });
+    console.log(error);
+    res.status(500).json({ msg: "Unable to fetch medicine data" });
   }
 });
+
 
 module.exports = router;
