@@ -49,6 +49,16 @@ const medicineSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  degrees: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  specialties:{
+    type: String,
+    required: true,
+  }
 });
 
 module.exports = medicineSchema;
