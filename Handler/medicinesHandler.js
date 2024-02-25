@@ -72,10 +72,10 @@ router.get("/:email", async (req, res) => {
   }
 }); */
 
-router.get("/meeting/:meetingId", async (req, res) => {
+router.get("/1/:meetingId", async (req, res) => {
   try {
     const meetingId = req.params.meetingId;
-    console.log(meetingId)
+    console.log(meetingId);
     const medicine = await Medicine.find({ meetingId: meetingId });
     res.send(medicine);
   } catch (error) {
@@ -83,6 +83,5 @@ router.get("/meeting/:meetingId", async (req, res) => {
     res.status(500).json({ msg: "Unable to fetch medicine data" });
   }
 });
-
 
 module.exports = router;
