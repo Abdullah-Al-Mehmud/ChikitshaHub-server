@@ -12,7 +12,7 @@ const appointmentHandler = require("./Handler/AppointmentHandler");
 const sendEmailHandler = require("./Handler/SendEmailHandler");
 const stripeHandler = require("./Handler/StripeHandler");
 const tipsHandler = require("./Handler/TipsHandler");
-const medicinesHandler = require("./Handler/medicinesHandler")
+const medicinesHandler = require("./Handler/medicinesHandler");
 const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
@@ -20,7 +20,11 @@ const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
 
 // middleware
 const corsOptions = {
-  origin: ["http://localhost:5173", "http://localhost:5174", "https://hilarious-wisp-3febc2.netlify.app"],
+  origin: [
+    "http://localhost:5173",
+    "http://localhost:5174",
+    "https://hilarious-wisp-3febc2.netlify.app",
+  ],
   credentials: true,
   optionSuccessStatus: 200,
 };

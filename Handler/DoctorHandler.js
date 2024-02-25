@@ -226,5 +226,34 @@ router.patch("/admin/statusUpdate/:id", async (req, res) => {
     });
   }
 });
+router.patch("/:email", async (req, res) => {
+  try {
+    const rating = req.body.fixedAverageRating;
+    // console.log(req.body.fixedAverageRating);
+    const result = await Doctor.updateOne(
+      {
+        doctorEmail: req.params.email,
+      },
+      {
+        $set: {
+          rating: rating,
+        },
+      }
+    );
+    if (result.modifiedCount === 1) {
+      res.status(201).send({
+        message: "updated successfully ",
+        success: true,
+        modifiedCount: result.modifiedCount,
+      });
+    }
+  } catch (error) {
+    res.status(400).send({
+      message: "Document not found or not modified",
+      success: false,
+      // modifiedCount: result.modifiedCount,
+    });
+  }
+});
 router.delete("/admin/docDelete/:id", deleteMiddleware(Doctor));
 module.exports = router;
