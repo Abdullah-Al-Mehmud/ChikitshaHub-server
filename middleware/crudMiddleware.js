@@ -21,6 +21,7 @@ const createMiddleware = (Model) => async (req, res, next) => {
 const readMiddleware = (Model) => async (req, res, next) => {
   try {
     const instances = await Model.find({});
+    // console.log(instances);
     res.json(instances);
   } catch (error) {
     next(error);

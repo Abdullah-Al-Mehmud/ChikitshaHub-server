@@ -2,6 +2,10 @@ const express = require("express");
 const mongoose = require("mongoose");
 const router = express.Router();
 const doctorReviewSchema = require("../Schema/DoctorReviewSchema");
+const {
+  readMiddleware,
+  deleteMiddleware,
+} = require("../middleware/crudMiddleware");
 const Review = new mongoose.model("DoctorReview", doctorReviewSchema);
 
 // post reviews
@@ -25,4 +29,6 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save doctor data" });
   }
 });
+router.get("/", readMiddleware(Review));
+router.delete("/:id", deleteMiddleware(Review));
 module.exports = router;
