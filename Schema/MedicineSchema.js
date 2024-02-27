@@ -36,6 +36,10 @@ const medicineSchema = mongoose.Schema({
   //   type: String,
   //   required: true,
   // },
+  fee: {
+    type: String,
+    required: true,
+  },
   age: {
     type: String,
     required: true,
@@ -46,16 +50,6 @@ const medicineSchema = mongoose.Schema({
   },
   medicines: [medicineSubSchema],
   meetingId: {
-    type: String,
-    required: true,
-  },
-  degrees: [
-    {
-      type: String,
-      required: true,
-    },
-  ],
-  specialties:{
     type: String,
     required: true,
   }
