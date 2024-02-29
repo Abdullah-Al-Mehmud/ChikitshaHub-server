@@ -83,7 +83,7 @@ router.get("/patient/:email", async (req, res) => {
   }
 }); */
 
-router.get("/1/:meetingId", async (req, res) => {
+router.get("/meeting/:meetingId", async (req, res) => {
   try {
     const meetingId = req.params.meetingId;
     console.log(meetingId);
