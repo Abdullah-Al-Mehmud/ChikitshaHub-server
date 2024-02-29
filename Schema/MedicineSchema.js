@@ -15,6 +15,13 @@ const medicineSubSchema = mongoose.Schema({
   },
 });
 
+const investigationSubSchema = mongoose.Schema({
+  investigationName: {
+    type: String,
+    required: true,
+  },
+});
+
 const medicineSchema = mongoose.Schema({
   doctorName: {
     type: String,
@@ -44,6 +51,7 @@ const medicineSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  investigations: [investigationSubSchema],
   medicines: [medicineSubSchema],
   meetingId: {
     type: String,
