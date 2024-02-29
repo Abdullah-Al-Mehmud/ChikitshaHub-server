@@ -8,7 +8,7 @@ const Medicine = new mongoose.model("Medicine", medicineSchema);
 router.post("/", async (req, res) => {
   try {
     const newMedicine = new Medicine(req.body);
-    // console.log(newMedicine);
+    console.log(newMedicine);
     await newMedicine.save();
     console.log(newMedicine);
     res.status(201).send({ message: "Send successfully ", success: true });
@@ -47,11 +47,22 @@ router.get("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save medicine data" });
   }
 });
-router.get("/:email", async (req, res) => {
+router.get("/doctor/:email", async (req, res) => {
   try {
     const email = req.params.email;
     // console.log(email);
-    const medicine = await Medicine.find({ email: email });
+    const medicine = await Medicine.find({ doctorEmail: email });
+    res.send(medicine);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to save medicine data" });
+  }
+});
+router.get("/patient/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    // console.log(email);
+    const medicine = await Medicine.find({ patientEmail: email });
     res.send(medicine);
   } catch (error) {
     console.log(error);
@@ -75,7 +86,7 @@ router.get("/:email", async (req, res) => {
 router.get("/1/:meetingId", async (req, res) => {
   try {
     const meetingId = req.params.meetingId;
-    console.log(meetingId)
+    console.log(meetingId);
     const medicine = await Medicine.find({ meetingId: meetingId });
     res.send(medicine);
   } catch (error) {

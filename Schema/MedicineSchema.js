@@ -43,6 +43,10 @@ const medicineSchema = mongoose.Schema({
   //   type: String,
   //   required: true,
   // },
+  fee: {
+    type: String,
+    required: true,
+  },
   age: {
     type: String,
     required: true,
