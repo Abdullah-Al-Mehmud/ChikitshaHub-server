@@ -34,6 +34,14 @@ const doctorSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  doctorType: {
+    type: String,
+    required: true,
+  },
+  gender: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     required: true,
