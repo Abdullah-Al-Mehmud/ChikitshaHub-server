@@ -18,7 +18,7 @@ const medicineSubSchema = mongoose.Schema({
 const investigationSubSchema = mongoose.Schema({
   investigationName: {
     type: String,
-    required: true,
+    required: false,
   },
 });
 
@@ -66,6 +66,10 @@ const medicineSchema = mongoose.Schema({
   specialties:{
     type: String,
     required: true,
+  },
+  feedback:{
+    type: String,
+    required: false
   }
 });
 
