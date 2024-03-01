@@ -27,6 +27,17 @@ const readMiddleware = (Model) => async (req, res, next) => {
     next(error);
   }
 };
+const readMiddlewareEmail = (Model) => async (req, res, next) => {
+  try {
+    const { doctorEmail } = req.params;
+    // console.log(doctorEmail);
+    const instances = await Model.find({ doctorEmail: doctorEmail });
+    res.json(instances);
+  } catch (error) {
+    next(error);
+  }
+};
+
 // Read middleware Mail
 const readMiddlewareMail = (Model) => async (req, res, next) => {
   try {
@@ -85,4 +96,5 @@ module.exports = {
   readMiddlewareMail,
   updateMiddleware,
   deleteMiddleware,
+  readMiddlewareEmail,
 };

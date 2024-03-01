@@ -30,7 +30,6 @@ router.get("/:email", async (req, res) => {
     res.status(500).json({ msg: "unable to get single user data" });
   }
 });
-
 // post data
 router.post("/", async (req, res) => {
   try {
