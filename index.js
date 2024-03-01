@@ -15,7 +15,7 @@ const tipsHandler = require("./Handler/TipsHandler");
 const medicinesHandler = require("./Handler/medicinesHandler");
 const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
-const SpecialitiesHandler = require("./Handler/SpecialitiesHandler");
+const SpecialtiesHandler = require("./Handler/SpecialtiesHandler");
 const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
 const doctorLiveHandler = require("./Handler/DoctorLiveHandler");
 // middleware
@@ -51,7 +51,7 @@ app.use("/logout", logoutHandler);
 
 //tips
 app.use("/tips", tipsHandler);
-app.use("/specialities", SpecialitiesHandler);
+app.use("/specialties", SpecialtiesHandler);
 
 //medicines
 app.use("/medicines", medicinesHandler);

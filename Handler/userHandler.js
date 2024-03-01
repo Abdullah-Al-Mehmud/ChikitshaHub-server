@@ -138,7 +138,7 @@ router.get("/admin/:email", verifyToken, verifyAdmin, async (req, res) => {
 
   const isAdmin = user?.role === "admin" ? true : false;
 
-  console.log(isAdmin);
+  // console.log(isAdmin);
 
   res.send({ isAdmin });
 });

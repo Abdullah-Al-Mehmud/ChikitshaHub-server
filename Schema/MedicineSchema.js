@@ -15,6 +15,13 @@ const medicineSubSchema = mongoose.Schema({
   },
 });
 
+const investigationSubSchema = mongoose.Schema({
+  investigationName: {
+    type: String,
+    required: false,
+  },
+});
+
 const medicineSchema = mongoose.Schema({
   doctorName: {
     type: String,
@@ -36,6 +43,10 @@ const medicineSchema = mongoose.Schema({
   //   type: String,
   //   required: true,
   // },
+  // fee: {
+  //   type: String,
+  //   required: true,
+  // },
   age: {
     type: String,
     required: true,
@@ -44,11 +55,26 @@ const medicineSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  investigations: [investigationSubSchema],
   medicines: [medicineSubSchema],
   meetingId: {
     type: String,
     required: true,
   },
+  degrees: [
+    {
+      type: String,
+      required: true,
+    },
+  ],
+  specialties:{
+    type: String,
+    required: true,
+  },
+  feedback:{
+    type: String,
+    required: false
+  }
 });
 
 module.exports = medicineSchema;
