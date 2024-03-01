@@ -17,7 +17,7 @@ const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialtiesHandler = require("./Handler/SpecialtiesHandler");
 const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
-
+const doctorLiveHandler = require("./Handler/DoctorLiveHandler");
 // middleware
 const corsOptions = {
   origin: [
@@ -55,6 +55,7 @@ app.use("/specialties", SpecialtiesHandler);
 
 //medicines
 app.use("/medicines", medicinesHandler);
+app.use("/doctorlive", doctorLiveHandler);
 
 app.use("/", (req, res) => {
   res.send("Chikitsha Hub server");
