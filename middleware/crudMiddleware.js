@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
 const createMiddleware = (Model) => async (req, res, next) => {
   try {
     const instance = new Model(req.body);
-    // console.log(instance);
+    console.log(instance);
     await instance.save();
     res.status(201).json(instance);
   } catch (error) {
