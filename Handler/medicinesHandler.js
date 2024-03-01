@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+
 // router.post("/", async (req, res) => {
 //   try {
 //     const medicine = req.body;
