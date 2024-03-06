@@ -17,6 +17,7 @@ const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialtiesHandler = require("./Handler/SpecialtiesHandler");
 const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
+const reviewHandler = require("./Handler/ReviewHandler");
 const doctorLiveHandler = require("./Handler/DoctorLiveHandler");
 // middleware
 const corsOptions = {
@@ -45,6 +46,7 @@ app.use("/bmi", bmiHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/sendEmail", sendEmailHandler);
 app.use("/doctorReview", doctorReviewHandler);
+app.use("/review", reviewHandler);
 app.use("/create-payment-intent", stripeHandler);
 app.use("/jwt", jwtHandler);
 app.use("/logout", logoutHandler);
