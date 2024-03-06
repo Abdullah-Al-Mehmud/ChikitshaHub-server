@@ -5,6 +5,7 @@ const userSchema = require("../Schema/userSchema");
 const { verifyToken } = require("../middleware/VerifyToken");
 const { verifyAdmin } = require("../middleware/VerifyAdmin");
 const { verifyDoctor } = require("../middleware/VerifyDoctor");
+const { patchMiddleware } = require("../middleware/crudMiddleware");
 
 const User = new mongoose.model("User", userSchema);
 
@@ -23,13 +24,14 @@ router.get("/", async (req, res) => {
 router.get("/:email", async (req, res) => {
   try {
     const email = req.params.email;
-    const result = await User.find({ email: email });
+    const result = await User.findOne({ email: email });
     res.send(result);
   } catch (error) {
     console.log(error);
     res.status(500).json({ msg: "unable to get single user data" });
   }
 });
+router.patch("/:id", patchMiddleware(User));
 // post data
 router.post("/", async (req, res) => {
   try {

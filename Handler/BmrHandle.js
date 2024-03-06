@@ -3,13 +3,13 @@ const router = express.Router();
 const mongoose = require("mongoose");
 // const BodyFitNewSchema = require("../Schema/BodyFitNewSchema.js")
 // const { createMiddleware } = require("../middleware/crudMiddleware");
-const BMR = require('../Schema/BMRSchema');
+const BMR = require("../Schema/BMRSchema");
 const Bmr = new mongoose.model("Bmr", BMR);
 
 // get the bmi info
-router.get("/:email" , async (req, res) => {
+router.get("/:email", async (req, res) => {
   try {
-    const  {email} = req.params;
+    const { email } = req.params;
     console.log(email);
     const result = await Bmr.find({ email });
     res.send(result);
@@ -34,5 +34,5 @@ router.post("/", async (req, res) => {
     res.status(500).json({ msg: "unable to save bmi data" });
   }
 });
-  
-  module.exports = router;
+
+module.exports = router;
