@@ -9,7 +9,7 @@ const errorHandler = (err, req, res, next) => {
 const createMiddleware = (Model) => async (req, res, next) => {
   try {
     const instance = new Model(req.body);
-    // console.log(instance);
+    console.log(instance);
     await instance.save();
     res.status(201).json(instance);
   } catch (error) {
@@ -65,15 +65,52 @@ const readMiddlewareMail = (Model) => async (req, res, next) => {
 };
 
 // Update middleware
+// const updateMiddleware = (Model) => async (req, res, next) => {
+//   try {
+//     const updatedInstance = await Model.findOneAndUpdate(
+//       req.params.id,
+//       req.body,
+//       { new: true }
+//     );
+//     console.log(updatedInstance);
+//     res.json(updatedInstance);
+//   } catch (error) {
+//     next(error);
+//   }
+// };
 const updateMiddleware = (Model) => async (req, res, next) => {
   try {
-    const updatedInstance = await Model.findByIdAndUpdate(
-      req.params.id,
-      req.body,
+    const filter = { _id: req.params.id };
+    console.log(filter);
+    const updatedInstance = await Model.findOneAndUpdate(filter, req.body, {
+      new: true,
+    });
+    console.log(updatedInstance);
+    res.json(updatedInstance);
+  } catch (error) {
+    next(error);
+  }
+};
+
+const patchMiddleware = (Model) => async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { age, gender, bloodGroup, phoneNumber } = req.body;
+    const dataToUpdate = {};
+    if (age) dataToUpdate.age = age;
+    if (gender) dataToUpdate.gender = gender;
+    if (bloodGroup) dataToUpdate.bloodGroup = bloodGroup;
+    if (phoneNumber) dataToUpdate.phoneNumber = phoneNumber;
+    if (Object.keys(dataToUpdate).length === 0) {
+      return res.status(400).json({ message: "No valid update data provided" });
+    }
+
+    const updatedData = await Model.findByIdAndUpdate(
+      id,
+      { $set: dataToUpdate },
       { new: true }
     );
-    // console.log(updatedInstance);
-    res.json(updatedInstance);
+    return res.status(200).json({ data: updatedData });
   } catch (error) {
     next(error);
   }
@@ -97,4 +134,5 @@ module.exports = {
   updateMiddleware,
   deleteMiddleware,
   readMiddlewareEmail,
+  patchMiddleware,
 };
