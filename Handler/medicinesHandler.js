@@ -70,6 +70,28 @@ router.get("/patient/:email", async (req, res) => {
     res.status(500).json({ msg: "unable to save medicine data" });
   }
 });
+router.get("/doctor/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    // console.log(email);
+    const medicine = await Medicine.find({ doctorEmail: email });
+    res.send(medicine);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to save medicine data" });
+  }
+});
+router.get("/patient/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    // console.log(email);
+    const medicine = await Medicine.find({ patientEmail: email });
+    res.send(medicine);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ msg: "unable to save medicine data" });
+  }
+});
 /* router.get("/:meetingId", async (req, res) => {
   try {
     const meetingId = req.params.meetingId;

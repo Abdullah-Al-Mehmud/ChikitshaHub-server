@@ -8,6 +8,9 @@ const app = express();
 const doctorHandler = require("./Handler/DoctorHandler");
 const userHandler = require("./Handler/userHandler");
 const bmiHandler = require("./Handler/BMIHandler");
+const bodyfitHandler = require("./Handler/BodyFitHandle");
+const caloriesHandler = require("./Handler/CaloriesHandler");
+const bmrHandler = require("./Handler/BmrHandle");
 const appointmentHandler = require("./Handler/AppointmentHandler");
 const sendEmailHandler = require("./Handler/SendEmailHandler");
 const stripeHandler = require("./Handler/StripeHandler");
@@ -17,6 +20,7 @@ const jwtHandler = require("./Handler/JwtHandler");
 const logoutHandler = require("./Handler/LogoutHandler");
 const SpecialtiesHandler = require("./Handler/SpecialtiesHandler");
 const doctorReviewHandler = require("./Handler/DoctorReviewHandler");
+const reviewHandler = require("./Handler/ReviewHandler");
 const doctorLiveHandler = require("./Handler/DoctorLiveHandler");
 // middleware
 const corsOptions = {
@@ -42,9 +46,13 @@ mongoose
 app.use("/doctors", doctorHandler);
 app.use("/users", userHandler);
 app.use("/bmi", bmiHandler);
+app.use("/bmr", bmrHandler);
+app.use("/bodyfit", bodyfitHandler);
+app.use("/calories", caloriesHandler);
 app.use("/appointments", appointmentHandler);
 app.use("/sendEmail", sendEmailHandler);
 app.use("/doctorReview", doctorReviewHandler);
+app.use("/review", reviewHandler);
 app.use("/create-payment-intent", stripeHandler);
 app.use("/jwt", jwtHandler);
 app.use("/logout", logoutHandler);
