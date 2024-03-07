@@ -109,7 +109,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json({ msg: "unable to get single doctor data" });
   }
 });
-router.get("/1/:email", async (req, res) => {
+router.get("/2/:email", async (req, res) => {
   try {
     const email = req.params.email;
     console.log(email);
