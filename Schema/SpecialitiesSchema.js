@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 const SpecialitiesSchema = mongoose.Schema({
   image: {
     type: String,
-    required: true,
+    required: false,
   },
   specialties: {
     type: String,
