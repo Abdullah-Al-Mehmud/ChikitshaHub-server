@@ -2,7 +2,10 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const DoctorSchema = require("../Schema/DoctorSchema");
-const { deleteMiddleware } = require("../middleware/crudMiddleware");
+const {
+  deleteMiddleware,
+  updateMiddleware,
+} = require("../middleware/crudMiddleware");
 
 const Doctor = new mongoose.model("Doctor", DoctorSchema);
 
@@ -40,6 +43,8 @@ router.get("/live/:doctorEmail", async (req, res) => {
     res.status(500).json({ msg: "unable to get single doctor data" });
   }
 });
+
+router.put("/:id", updateMiddleware(Doctor));
 
 router.get("/search", async (req, res) => {
   try {
@@ -98,6 +103,17 @@ router.get("/:id", async (req, res) => {
   try {
     const id = req.params.id;
     const result = await Doctor.findById(id);
+    res.send(result);
+  } catch (error) {
+    // console.log(error);
+    res.status(500).json({ msg: "unable to get single doctor data" });
+  }
+});
+router.get("/1/:email", async (req, res) => {
+  try {
+    const email = req.params.email;
+    console.log(email);
+    const result = await Doctor.findOne({ doctorEmail: email });
     res.send(result);
   } catch (error) {
     // console.log(error);
@@ -183,6 +199,7 @@ router.patch("/admin/statusUpdate/:id", async (req, res) => {
     });
   }
 });
+
 router.patch("/:email", async (req, res) => {
   try {
     const rating = req.body.fixedAverageRating;
